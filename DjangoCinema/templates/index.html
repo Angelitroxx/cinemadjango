@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if funciones %}
+<div class="row justify-content-center align-items-center g-2 row-cols-4">
+  {% for f in funciones %}
+  <div class="col">
+    <div class="card bg-dark text-white h-100">
+      <img class="card-img-top" src="{{ f.pelicula.imagen.url }}" alt="{{ f.pelicula.nombre }}">
+      <div class="card-body">
+        <h4 class="card-title">{{ f.pelicula.nombre }}</h4>
+        <p class="card-text">{{ f.fecha|date:"j \d\e F \d\e Y" }} {{ f.hora|time:"H:i" }}</p>
+        <p class="card-text">Sala : {{ f.sala }}</p>
+        <p class="card-text">Asientos Disponibles : {{ f.asientos_disponibles }}</p>
+        {% if f.asientos_disponibles == 0 %}
+        <a class="btn btn-danger w-100 mt-auto disabled" href="#" role="button">Agotados</a>
+        {% else %}
+        <a class="btn btn-primary w-100 mt-auto" href="{% url 'comprar' f.id %}" role="button">Comprar</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-warning text-center" role="alert">
+  <strong>No hay funciones disponibles</strong>
+</div>
+{% endif %}
+{% endblock %}

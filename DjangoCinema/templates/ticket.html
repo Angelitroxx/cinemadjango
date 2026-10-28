@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="border border-dark border-4">
+  <div class="row justify-content-center align-items-center g-2">
+    <div class="col-12 display-5 bg-dark text-white text-center">DJANGO CINEMA TICKET</div>
+    <div class="col p-5">
+      <h1 class="fs-4">{{ venta.funcion }}</h1>
+      <h3 class="fs-5">Fecha : {{ venta.funcion.fecha|date:"j \d\e F \d\e Y" }}</h3>
+      <h3 class="fs-5">Hora : {{ venta.funcion.hora|time:"H:i" }}</h3>
+      <h3 class="fs-5">Sala : {{ venta.funcion.sala }}</h3>
+    </div>
+    <div class="col-md-5 cols-sm-12 p-5">
+      <h1 class="fs-4">{{ venta.cliente }}</h1>
+      <h3 class="fs-5">Entradas : {{ venta.entradas }}</h3>
+      <h3 class="fs-5">Total descuento : $ {{ venta.total_descuento }}</h3>
+      <h3 class="fs-5">Total final : $ {{ venta.total_final }}</h3>
+    </div>
+    <div class="col-2 cols-sm-12">
+      <img src="/media/qr/qr.png" class="img-fluid" alt="QR">
+    </div>
+  </div>
+</div>
+<div class="alert alert-info mt-3 text-center" role="alert">
+  Debe presentar este ticket al ingreso
+</div>
+<a class="btn btn-primary" href="{% url 'index' %}" role="button">Volver</a>
+{% endblock %}
